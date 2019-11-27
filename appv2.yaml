@@ -1,0 +1,35 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: appv2
+spec:
+  type: LoadBalancer
+  selector:
+    app: appv2
+  ports:
+  - protocol: TCP
+    port: 8181
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appv2
+  labels:
+    app: appv2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: appv2
+  template:
+    metadata:
+      labels:
+        app: appv2
+    spec:
+      containers:
+      - name: appv2
+        image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
+        ports:
+        - containerPort: 8181
