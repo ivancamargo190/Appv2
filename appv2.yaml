@@ -8,7 +8,7 @@ spec:
     app: appv2
   ports:
   - protocol: TCP
-    port: 8181
+    port: 80
 
 ---
 
@@ -30,6 +30,6 @@ spec:
     spec:
       containers:
       - name: appv2
-        image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
+        image: us.gcr.io/sincere-chariot-260312/app2@sha256:93daa25497670845b23b5864cf47a2a33068517ee830fe41d359dfa805181f3d
         ports:
-        - containerPort: 8181
+        - containerPort: 80
